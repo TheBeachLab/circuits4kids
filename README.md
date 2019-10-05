@@ -22,22 +22,21 @@ Circuits for Kids is a workflow to assist people with reduced fine motor skills 
 
 ## Preparing the circuit canvas
 
-The circuit canvas will be one A4 magnetic sheet with a layer of white vinyl.
-
-> **Please note:** The magnetic sheet has two sides. Only one of them is magnetised. The satin side is magnetised while the mat side is not magnetised. Place the white vinyl in the magnetised satin side of the magnetic sheet.
-
-The circuits will be drawn here with the erasable marker. Make sure that the erasable marker is erasable in your vinyl.
+The circuit canvas will be one A4/A3 metal sheet with a layer of white vinyl. The circuits will be hand-drawn here with the erasable marker. Make sure that the erasable marker erases easily in your vinyl.
 
 ## Preparing the the SMD components stencils
 
-On top of the magnetic canvas we will place some magnetic stencils with different components. 
+On top of the magnetic canvas we will place the magnetic stencils with the different components. 
 
-1. Download the A4 stencils from here.
-2. Cut it with the vinyl cutter.
-3. Peel of the outside (see image below) of the stencil. [Image placeholder]
-4. Transfer the stencils on the satin (magnetised) side of a new magnetised sheet.
-5. Cut the magnetised sheet along the oulines.
-6. With a tweezer, carefully remove the pads of the vinyl. Pads should be black, the rest white.
+![stencils](stencil.png)
+
+1. Download the A4 stencils from [here](10x.svg).
+2. Cut it with the vinyl cutter. Use preferably 60 degree blade. If not try with the 45 degree. Otherwise hide the text layer.
+3. Transfer the stencils on the mat (non magnetised) side of a new magnetic sheet.
+4. Cut the magnetised sheet along the oulines of the components.
+5. With a tweezer, carefully remove the pads of the vinyl, leaving the text in the magnetised sheet. Pads should be black, the rest white.
+
+> **Please note:** The magnetic sheet has two sides. Only one of them is magnetised. The satin side is magnetised while the mat side is not magnetised. Place the white vinyl in the non-magnetised satin side of the magnetic sheet.
 
 ## Fabricating the rectifiers
 
@@ -49,13 +48,13 @@ The rectifiers are 3D printed parts with EVA foam that will erase the excess of 
 
 ## Drawing a circuit board
 
-- Place the magnetic components on top of the canvas and use the 4mm marker to draw the traces.
-- Draw an outline around your circuit. It will be used as the cutout line.
+- Place the magnetic components on top of the canvas and use the marker to draw the traces.
+- Draw an free-hand outline around your circuit. It will be used as the cutout line.
 
 ## Fabricating the circuit board
 
 1. Scan the assembly (canvas with magnetic components and hand-drawn traces) with a flatbed scanner to png format.
-2. Using [`mods`](https://github.com/fabfoundation/mods) or your favourite software cut-out the traces and the outline of your circuit.
+2. Using [`mods`](https://github.com/fabfoundation/mods) or your favourite software mill the traces and cutout the outline of your circuit.
 3. Stuff your components, program it (if needed) and you are ready to go!
 
 ## Tips and Tricks
