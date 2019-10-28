@@ -1,0 +1,121 @@
+"""
+examples/fab_ISP.ko
+
+The fab in-circuit programmer, demonstrating kokopelli's PCB
+design library.
+
+Based on hello.ISP.44.cad:
+http://academy.cba.mit.edu/classes/embedded_programming/hello.ISP.44.cad
+[Neil Gershenfeld 2/10/11, based on FabISP designed by David Mellis]
+"""
+
+from koko.lib.pcb import *
+
+# Initialize the circuit board with xy position, width, and height
+pcb = PCB(0, 0, 0.8267717, 1.169291)
+
+# We use an ATtiny44 as the brains of the programmer
+IC1 = t44(0.6, 1., 0, 'IC1\nt44')
+pcb += IC1
+
+# Add an ISP header to program the programmer
+J1 = headerisp(IC1.x + 0.0, IC1[7].y - 0.2, 0, 'SPI')
+pcb += J1
+
+
+# Create a solder jumper and connect it to RST
+SJ1 = sj(IC1['PA6'].x - 0.15, J1.y+0.45, 90, 'SJ1')
+pcb += SJ1
+
+# Add the USB port
+J2 = usb(IC1.x-0.02, pcb.height - 0.04, 180, 'J2 USB')
+#pcb += J2
+
+R1 = resistor(J2[5].x + 0.09, J2[5].y - 0.45, 0, "R1\n1k")
+pcb += R1
+
+R2 = resistor(R1[2].x, R1.y - 0.143, 90, "R2\n499")
+#pcb += R2
+
+SJ2 = resistor(R2.x - 0.015, R2.y - 0.2, 90, "SJ2")
+#pcb += SJ2
+
+# Add a pair of diodes to limit voltages
+D1 = schottky(J2['+'].x-.1, R1[2].y, 0, "D1\n3.3V")
+pcb += D1
+D2 = schottky(D1[1].x, D1.y - 0.07, 0, "\nD2 3.3V")
+#pcb += D2
+
+# Connect the diode anodes
+
+R3 = resistor(D2.x+0.04, D2.y-0.15, 90, 'R3\n100')
+#pcb += R3
+
+R4 = resistor(D1[2].x-0.01, R3.y, 90, 'R4\n100')
+#pcb += R4
+ 
+# Ground the diodes
+
+R5 = resistor(SJ1.x-0.07, J1['GND'].y, 90, 'R5\n10k')
+#pcb += R5
+
+C1 = capacitor(R5.x-0.1, R5.y, 90, "C1\n1uF")
+#pcb += C1
+
+# Add the clock crystal
+XTAL1 = xtal(IC1.x-0.27, IC1['PB0'].y-0.25, 90, '20\nMHz')
+pcb += XTAL1
+# and loading capacitors for the clock crystal
+C2 = capacitor(XTAL1.x-0.12, XTAL1.y+0.12, 90, 'C2\n10pF')
+#pcb += C2
+C3 = capacitor(XTAL1.x-0.12, XTAL1.y-0.12, 90, 'C3\n10pF')
+#pcb += C3
+# Connect the loading caps to ground
+
+# Loop VCC around to connect to IC1
+
+# Add the CBA logo
+#pcb += cba(0.15, pcb.height-0.16)
+
+header4= Header_4(0.6,0.25,0,'H4')
+pcb+=header4
+
+ftdi= Header_FTDI(0.5,0.05,90,'FTDI')
+pcb+=ftdi
+
+button= Button_6mm(0.1,1,90,'BUT')
+pcb+=button
+
+res= XTAL_EFOBM(0.1,0.05,90,'RES')
+pcb+=res
+
+rgb= LED_RGB(0.1,0.75,90,'RGB')
+pcb+=rgb
+
+reg= Regulator_SOT23(0.3,0.64,90,'REG')
+pcb+=reg
+
+t45= ATtiny45_SOIC(0.2,0.25,0,'T45')
+pcb+=t45
+
+res2= resistor(0.1,0.65,0,'RES')
+pcb+=res2
+
+res2= resistor(0.1,0.55,0,'LED')
+pcb+=res2
+
+res3= resistor(0.1,0.45,0,'CAP')
+pcb+=res3
+
+res4= resistor(0.3,0.46,90,'EXT')
+pcb+=res4
+
+
+# Select one of these options:
+#   Layout shows parts with labels and colors
+#   Traces is simply the black and white trace cutout
+#   Cutout is the board outline
+
+cad.shapes = pcb.layout
+#cad.shape = pcb.traces
+#cad.shape = pcb.cutout
